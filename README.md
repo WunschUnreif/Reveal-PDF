@@ -1,3 +1,3 @@
 # reveal-pdf
 
-Convert PDF slides to [reveal.js](https://revealjs.com/) slides.
+Open `index.html` to view the slides.
