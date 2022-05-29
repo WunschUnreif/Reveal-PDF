@@ -53,17 +53,23 @@ async function init(outDir: string, force: boolean) {
             process.exit(1);
         } else {
             console.warn(`Directory \`${outDir}\` will be cleared!`);
-            shell.rm('-r', outDir);
+            shell.rm('-rf', outDir);
         }
     }
 
     shell.mkdir(outDir);
-    let cp = shell.cp('-r', './template/*', outDir);
-
-    if (cp.code !== 0) {
-        console.error('Cannot copy templates.');
+    if (!fs.existsSync(outDir)) {
+        console.error('Cannot create output directory.');
         process.exit(1);
     }
+
+    let clone = shell.exec(`git clone -b reveal-template https://github.com/WunschUnreif/Reveal-PDF.git ${outDir}`);
+    if (clone.code !== 0) {
+        console.error('Cannot clone templates.');
+        process.exit(1);
+    }
+
+    shell.rm('-rf', `${outDir}/.git`, `${outDir}.gitignore`);
 }
 
 async function dirEmpty(dirname: string) {
