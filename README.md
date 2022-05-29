@@ -29,6 +29,10 @@ Convert PDF slides to [reveal.js](https://revealjs.com/) slides.
     npm run unlink
     ```
 
+## 示例
+
+[转换自`test/sample.pdf`](https://wunschunreif.github.io/Reveal-PDF/)
+
 ## 已知问题
 
 - 对于PDF文件中的部分字体可能无法解析，导致相应的页面不能成功转换。
