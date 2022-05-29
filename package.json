@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "ts-node src/index.ts",
-    "dist": "node dist/index.js",
+    "dist": "node bin/index.js",
     "build": "tsc",
-    "install": "npm link",
-    "uninstall": "npm unlink -g reveal-pdf"
+    "link": "npm link",
+    "unlink": "npm unlink -g reveal-pdf"
   },
   "bin": {
     "reveal-pdf": "./bin/index.js"
