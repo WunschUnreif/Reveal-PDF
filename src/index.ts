@@ -101,7 +101,7 @@ async function writeMainHTML(doc: PDFjs.PDFDocumentProxy, outDir: string) {
     let title = ((await doc.getMetadata()).info as any)['Title'];
     let viewport = await getViewport(doc);
 
-    let template = fs.readFileSync('template/index.html').toString('utf-8');
+    let template = fs.readFileSync(`${outDir}/index.html`).toString('utf-8');
 
     template = template.replace('{%TITLE%}', title);
     template = template.replace('{%SECTIONS%}', body);
@@ -152,7 +152,7 @@ async function getOutline(doc: PDFjs.PDFDocumentProxy) {
 function dumpPages(doc: PDFjs.PDFDocumentProxy, outDir: string) {
     for (let i = 1; i <= doc.numPages; i += 1) {
         doc.getPage(i).then((page) => {
-            generateHTML(page).then((html) => {
+            generateHTML(page, outDir).then((html) => {
                 fs.writeFile(`${outDir}/pages/p${i}.html`, html, () => { });
             }).catch(() => {
                 console.error('FAILED:', i);
@@ -161,8 +161,8 @@ function dumpPages(doc: PDFjs.PDFDocumentProxy, outDir: string) {
     }
 }
 
-async function generateHTML(page: PDFjs.PDFPageProxy): Promise<string> {
-    let html = fs.readFileSync('template/pages/template.html').toString('utf-8');
+async function generateHTML(page: PDFjs.PDFPageProxy, templateDir: string): Promise<string> {
+    let html = fs.readFileSync(`${templateDir}/pages/template.html`).toString('utf-8');
     const [svg, css] = await (renderSVG(page));
 
     html = html.replace('{%svg%}', svg);
