@@ -1,6 +1,6 @@
 {
   "name": "reveal-pdf",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "dev": "ts-node src/index.ts",
     "dist": "node bin/index.js",

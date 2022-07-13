@@ -88,12 +88,13 @@ async function dirEmpty(dirname: string) {
 
 async function writeMainHTML(doc: PDFjs.PDFDocumentProxy, outDir: string) {
     let sections = await getOutline(doc);
+    let pageLabels = await doc.getPageLabels();
     let body = '';
 
     for (const section of sections) {
         body += '<section>\n';
         for (let page = section.start; page < section.end; ++page) {
-            body += '    ' + getPageHTML(page) + '\n';
+            body += '    ' + getPageHTML(page, pageLabels) + '\n';
         }
         body += '</section>\n';
     }
@@ -111,8 +112,9 @@ async function writeMainHTML(doc: PDFjs.PDFDocumentProxy, outDir: string) {
     fs.writeFile(`${outDir}/index.html`, template, () => { });
 }
 
-function getPageHTML(pageNum: number) {
-    return `<section class="pdf" data-file="pages/p${pageNum}.html"></section>`
+function getPageHTML(pageNum: number, labels: string[] | null) {
+    let label = labels ? labels[pageNum - 1] : pageNum;
+    return `<section class="pdf" data-label="${label}" data-file="pages/p${pageNum}.html"></section>`
 }
 
 async function getViewport(doc: PDFjs.PDFDocumentProxy) {

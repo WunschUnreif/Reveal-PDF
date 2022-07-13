@@ -2,7 +2,7 @@
 
 Convert PDF slides to [reveal.js](https://revealjs.com/) slides.
 
-将你的PDF演示文稿转换为利用[reveal.js](https://revealjs.com/)展示的版本。可以自动识别章节，将同一章节的幻灯片放置在同一组[vertical slides](https://revealjs.com/vertical-slides/)内。
+将你的PDF演示文稿转换为利用[reveal.js](https://revealjs.com/)展示的版本。可以自动识别章节，将同一章节的幻灯片放置在同一组[vertical slides](https://revealjs.com/vertical-slides/)内；能够识别`\pause`等beamer overlay，移除连续相同页码的切换动画。
 
 ## 如何使用
 
@@ -36,3 +36,15 @@ Convert PDF slides to [reveal.js](https://revealjs.com/) slides.
 ## 已知问题
 
 - 对于PDF文件中的部分字体可能无法解析，导致相应的页面不能成功转换。
+
+## Changelog
+
+### 0.0.2
+
+#### 【功能】
+
+- 识别PDF文档的页码标签，为连续相同页码的幻灯片移除切换动画
+
+### 0.0.1
+
+- 基本功能

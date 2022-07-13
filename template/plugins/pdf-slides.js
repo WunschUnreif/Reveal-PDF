@@ -36,4 +36,17 @@ function RevealPDF_Init(pre) {
         }
         slide.setAttribute('data-transition-speed', 'fast');
     }
+
+    pre.on('slidechanged', (event) => {
+        let currentLabel = event.currentSlide.getAttribute('data-label');
+        let previousLabel = event.previousSlide.getAttribute('data-label');
+
+        if (currentLabel == previousLabel) {
+            event.currentSlide.setAttribute('data-transition', 'none');
+            event.previousSlide.setAttribute('data-transition', 'none');
+        } else {
+            event.currentSlide.setAttribute('data-transition', 'slide');
+            event.previousSlide.setAttribute('data-transition', 'slide');
+        }
+    })
 }
